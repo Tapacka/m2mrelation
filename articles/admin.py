@@ -5,7 +5,7 @@ from django.forms import BaseInlineFormSet
 from .models import Article, Tags, TagsArticle
 
 
-class RelationshipInlineFormset(BaseInlineFormSet):
+class TagsArticleInlineFormset(BaseInlineFormSet):
     def clean(self):
         l=[]
         for form in self.forms:            
@@ -18,17 +18,17 @@ class RelationshipInlineFormset(BaseInlineFormSet):
         return super().clean()
 
 
-class RelationshipInline(admin.TabularInline):
+class TagsArticleInline(admin.TabularInline):
     model = TagsArticle
-    formset = RelationshipInlineFormset
+    formset = TagsArticleInlineFormset
     
 
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    inlines = [RelationshipInline]
+    inlines = [TagsArticleInline]
 
 @admin.register(Tags)
 class TagsAdmin(admin.ModelAdmin):
-    inlines = [RelationshipInline]
+    pass
     

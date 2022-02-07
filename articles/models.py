@@ -6,6 +6,8 @@ class Tags(models.Model):
         return self.name
 
     class Meta:
+        verbose_name = 'Тэг'
+        verbose_name_plural = 'Тэги'
         ordering= ['name']
 
 class Article(models.Model):
@@ -14,6 +16,7 @@ class Article(models.Model):
     text = models.TextField(verbose_name='Текст')
     published_at = models.DateTimeField(verbose_name='Дата публикации')
     image = models.ImageField(null=True, blank=True, verbose_name='Изображение',)
+    tags = models.ManyToManyField(Tags, related_name = 'tags', through='TagsArticle')
     
     class Meta:
         verbose_name = 'Статья'
